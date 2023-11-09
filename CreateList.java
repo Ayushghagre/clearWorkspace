@@ -18,7 +18,7 @@ public class CreateList {
         Node newNode = new Node(data);  
         //Checks if the list is empty.  
         if(head == null) {  
-             //If list is empty, both head and tail would point to new node.  
+             
             head = newNode;  
             tail = newNode;  
             newNode.next = head;  
