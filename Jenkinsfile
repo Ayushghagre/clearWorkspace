@@ -6,7 +6,7 @@ node {
     ])
 
     def branchName = env.BRANCH_NAME
-    def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace1_"+branchName
+    def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
 
     try {
         stage("Clearing Workspace") {
