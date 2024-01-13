@@ -9,6 +9,10 @@ node {
     def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
 
     try {
+        stage("checkout")
+        {
+            checkout scm
+        }
         stage("Clearing Workspace") {
 
 def branchesToExclude = ["main","feature1","feature2"]
