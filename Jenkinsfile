@@ -11,7 +11,7 @@ node {
     try {
         stage("Clearing Workspace") {
 
-def branchesToExclude = ["main","feature1","feature2","feature3"]
+def branchesToExclude = ["main","feature1","feature2"]
 
             if (branchesToExclude.contains(branchName)) {
                 echo "No need to delete the workspace"
