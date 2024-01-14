@@ -20,7 +20,7 @@ stage("clearing Workspace")
    {
     dir(workspace)
     {
-      deleteDir();
+      deleteDir()
     }
 
    }
@@ -31,6 +31,6 @@ catch(Exception e)
 {
   currentBuild.result="FAILURE"
   echo "encountered an Exception"
-  echo  e.toString();
+  echo  e.toString()
 }
 }
