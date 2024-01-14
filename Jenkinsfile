@@ -1,29 +1,36 @@
-node {
-    properties([
-        pipelineTriggers([
-            cron('H 4 * * 1-5')
-        ])
-    ])
+node
+{
+def branchName=env.BRANCH_NAME
+def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
+currentBuild.result = 'SUCCESS'
+try{
+stage("checkout")
+{
+    checkout scm
+}
+stage("clearing Workspace")
+{
+   def branchesToExclude = ["main","feature1","feature2","feature3"]
+   if(branchesToExclude.contains(branchName))
+   {
+    echo "no need to delete the workspace for the branch ${branchName}"
 
-    def branchName = env.BRANCH_NAME
-    def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
-
-    try {
-        stage("Clearing Workspace") {
-
-def branchesToExclude = ["main","feature1","feature2","feature3"]
-
-            if (branchesToExclude.contains(branchName)) {
-                echo "No need to delete the workspace"
-            } else {
-                dir(workspace) {
-                    deleteDir()
-                }
-            }
-        }
-    } catch (Exception e) 
+   }
+   else
+   {
+    dir(workspace)
     {
-        echo "Encountered an exception"
-        echo e.toString()
+      deleteDir();
     }
+
+   }
+
+}
+}
+catch(Exception e)
+{
+  currentBuild.result="FAILURE"
+  echo "encountered an Exception"
+  echo  e.toString();
+}
 }
