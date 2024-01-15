@@ -1,6 +1,10 @@
 node
 {
-
+properties([
+        pipelineTriggers([
+            cron('H/11 * * * *')
+        ])
+    ])
 def branchName=env.BRANCH_NAME
 def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
 def REPO_URL="https://github.com/Ayushghagre/clearWorkspace.git"
