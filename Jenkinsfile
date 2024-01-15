@@ -1,5 +1,10 @@
 node
 {
+   properties([
+        pipelineTriggers([
+            cron('H/5 * * * *')
+        ])
+    ])
 
 def branchName=env.BRANCH_NAME
 def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
