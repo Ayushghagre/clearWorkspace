@@ -2,7 +2,7 @@ node
 {
 
 def branchName=env.BRANCH_NAME
-def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\${JOB_NAME}"
+def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
    echo workspace
 def REPO_URL="https://github.com/Ayushghagre/clearWorkspace.git"
 currentBuild.result="SUCCESS"
