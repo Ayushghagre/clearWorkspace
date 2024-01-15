@@ -13,16 +13,23 @@ stage("checkout")
 }
 stage("clearing Workspace")
 {
-def branchExists = bat(script: "git ls-remote --heads ${REPO_URL} ${branchName}", returnStdout: true).trim()
-echo branchExists
-
-
+def branchExists = bat(script: "git ls-remote --heads ${REPO_URL} ${branchName}", returnStdout: true).trim().contains(branchName)
+if(branchExists)
+{
+  echo "no need to clear the  workspace for the branch ${branchName}"
+}
+else
+{
+    dir(workspace)
+    {
+      deleteDir()
+    }
 
 }
 
 
 }
-
+}
 catch(Exception e)
 {
 echo "Encountered  An Exception"
