@@ -1,36 +1,39 @@
 node
 {
+
 def branchName=env.BRANCH_NAME
-def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
-currentBuild.result = 'SUCCESS'
-try{
+def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\"+branchName
+def REPO_URL="https://github.com/Ayushghagre/clearWorkspace.git"
+currentBuild.result="SUCCESS"
+try
+{
 stage("checkout")
 {
-    checkout scm
+   checkout scm
 }
 stage("clearing Workspace")
 {
-   def branchesToExclude = ["main","feature1","feature2","feature3"]
-   if(branchesToExclude.contains(branchName))
-   {
-    echo "no need to delete the workspace for the branch ${branchName}"
-
-   }
-   else
-   {
+def branchExists = bat(script: "git ls-remote --heads ${REPO_URL} ${branchName}", returnStdout: true).trim().contains(branchName)
+if(branchExists)
+{
+  bat "no need to clear the  workspace for the branch ${branchName}"
+}
+else
+{
     dir(workspace)
     {
       deleteDir()
     }
 
-   }
+}
+
 
 }
 }
 catch(Exception e)
 {
-  currentBuild.result="FAILURE"
-  echo "encountered an Exception"
-  echo  e.toString()
+echo "Encountered  An Exception"
+currentBuild.result="FAILURE"
+echo e.toString()
 }
 }
