@@ -16,7 +16,7 @@ stage("clearing Workspace")
 def branchExists = bat(script: "git ls-remote --heads ${REPO_URL} ${branchName}", returnStdout: true).trim().contains(branchName)
 if(branchExists)
 {
-  bat "no need to clear the  workspace for the branch ${branchName}"
+  echo "no need to clear the  workspace for the branch ${branchName}"
 }
 else
 {
