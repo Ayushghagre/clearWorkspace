@@ -15,18 +15,14 @@ stage("clearing Workspace")
 {
 def branchExists = bat(script: "git ls-remote --heads ${REPO_URL} ${branchName}", returnStdout: true).trim()
 echo branchExists
-else
-{
-    dir(workspace)
-    {
-      deleteDir()
-    }
+
+
 
 }
 
 
 }
-}
+
 catch(Exception e)
 {
 echo "Encountered  An Exception"
