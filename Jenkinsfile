@@ -5,7 +5,7 @@ node {
         ])
     ])
 
-    def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace"
+    def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\"
     def REPO_URL = "https://github.com/Ayushghagre/clearWorkspace.git"
     currentBuild.result = "SUCCESS"
 
