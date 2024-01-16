@@ -23,8 +23,10 @@ def branchNames = remoteBranches.readLines().collect { line ->
     line.split(/\s+/)[1].replaceAll('refs/heads/', '')
 }
 
-echo branchNames
-        
+for(branch in branchNames)
+ {
+                
+       echo branch 
    
 }
 
