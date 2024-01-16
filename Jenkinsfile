@@ -19,14 +19,14 @@ node {
                    .findAll { it.contains('refs/heads/') } 
                    .collect { it.split()[1].replaceAll('refs/heads/', '') } 
 
-            def workspaceDirs = bat(script: "dir /B /A:D ${workspace}", returnStdout: true).trim().split("\\r?\\n")
+            def workspaceDirs = bat(script: "dir /B  ${workspace}", returnStdout: true).trim().split("\\r?\\n")
             for (dir in workspaceDirs) {
             echo "Directory: ${dir}"
                }
             for (dir in workspaceDirs) {
     if (!branchList.contains(dir)) {
         echo "Deleting workspace for branch: ${dir}"
-        bat "rmdir /S /Q \"${dir}\""
+        bat "rmdir /S /Q \"${workspace}${dir}\""
 
 
     }
