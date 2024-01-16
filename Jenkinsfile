@@ -21,8 +21,9 @@ node {
 
            def workspaceRootDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace"
            def command = "dir /B /A:D ${workspaceRootDir}"
-            echo command
-           // def workspaceDirs = bat(script: command, returnStdout: true).trim().split("\n")
+            
+           def workspaceDirs = bat(script: command, returnStdout: true).trim()
+            echo workspaceDirs
            //  for( dir in workspaceDirs)
            //  {
            //      echo dir
