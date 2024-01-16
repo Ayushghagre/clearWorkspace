@@ -19,15 +19,12 @@ node {
                    .findAll { it.contains('refs/heads/') } 
                    .collect { it.split()[1].replaceAll('refs/heads/', '') } 
 
-           def workspaceRootDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace"
-           def command = "dir /B /A:D ${workspaceRootDir}"
+           
+           def command = "dir /B /A:D ${workspace}"
             
            def workspaceDirs = bat(script: command, returnStdout: true).trim()
-            echo workspaceDirs
-           //  for( dir in workspaceDirs)
-           //  {
-           //      echo dir
-           //  }
+          //  echo workspaceDirs
+          
 
         }
     } catch (Exception e) {
