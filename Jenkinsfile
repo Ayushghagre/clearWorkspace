@@ -18,9 +18,7 @@ node {
             def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
             echo remoteBranches
 
-            def branchNames = remoteBranches.readLines().collect { line ->
-                line.split(/\s+/)[2].replaceAll('refs/heads/', '')
-            }
+            def branchList = remoteBranches.readLines().collect { it.split()[1].replaceAll('refs/heads/', '') }
 
             for (branch in branchNames) {
                 echo branch
