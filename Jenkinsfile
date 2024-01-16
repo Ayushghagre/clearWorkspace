@@ -19,7 +19,7 @@ node {
             echo remoteBranches
 
             def branchNames = remoteBranches.readLines().collect { line ->
-                line.split(/\s+/)[1].replaceAll('refs/heads/', '')
+                line.split(/\s+/)[2].replaceAll('refs/heads/', '')
             }
 
             for (branch in branchNames) {
