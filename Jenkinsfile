@@ -17,7 +17,7 @@ stage("checkout")
 }
 stage("clearing up Workspace")
 {
-def remoteBranches = bat(script: "git ls-remote --heads ${repoUrl}", returnStdout: true).trim()
+def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
         echo remoteBranches
 }
 
