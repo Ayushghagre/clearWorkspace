@@ -16,26 +16,23 @@ node {
 
         stage("clearing up Workspace") {
             def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
-            
 
-           
-
-def branchList = remoteBranches.readLines()
+            def branchList = remoteBranches.readLines()
                    .findAll { it.contains('refs/heads/') } 
                    .collect { it.split()[1].replaceAll('refs/heads/', '') } 
 
-def workspaceDirs = bat(script: "dir /B /A:D ${workspace}", returnStdout: true).trim().split("\\r?\\n")
+            def workspaceDirs = bat(script: "dir /B /A:D ${workspace}", returnStdout: true).trim().split("\\r?\\n")
 
-        workspaceDirs.each { dir ->
-            if (!branchList.contains(dir)) {
-                echo "Deleting workspace for branch: ${dir}"
-                bat "rmdir /S /Q ${workspace}\\${dir}"
+            workspaceDirs.each { dir ->
+                if (!branchList.contains(dir)) {
+                    echo "Deleting workspace for branch: ${dir}"
+                    bat "rmdir /S /Q ${workspace}\\${dir}"
+                }
             }
-        
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
         currentBuild.result = "FAILURE"
         echo e.toString()
     }
-}
+} // This is the closing brace for the 'node' block
