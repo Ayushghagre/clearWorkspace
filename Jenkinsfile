@@ -24,7 +24,7 @@ def branchList = remoteBranches.readLines()
                    .findAll { it.contains('refs/heads/') } // Filter lines containing 'refs/heads/'
                    .collect { it.split()[1].replaceAll('refs/heads/', '') } // Extract branch names
 
-def workspaceDirs = bat(script: "dir /B ${workspace}", returnStdout: true).trim().split("\\r?\\n")
+def workspaceDirs = bat(script: "dir  ${workspace}", returnStdout: true).trim().split("\\r?\\n")
 
         for (dir in workspaceDirs)
             {
