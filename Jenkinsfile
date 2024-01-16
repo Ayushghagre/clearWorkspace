@@ -21,8 +21,8 @@ node {
            
 
 def branchList = remoteBranches.readLines()
-                   .findAll { it.contains('refs/heads/') } // Filter lines containing 'refs/heads/'
-                   .collect { it.split()[1].replaceAll('refs/heads/', '') } // Extract branch names
+                   .findAll { it.contains('refs/heads/') } 
+                   .collect { it.split()[1].replaceAll('refs/heads/', '') } 
 
 def workspaceDirs = bat(script: "dir /B /A:D ${workspace}", returnStdout: true).trim().split("\\r?\\n")
 
