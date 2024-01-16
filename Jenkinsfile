@@ -19,7 +19,9 @@ stage("clearing up Workspace")
 {
 def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
 def branchList = remoteBranches.readLines().collect { it.split()[1].replaceAll('refs/heads/', '') }
-        echo branchList
+   for( int i=0;i<branchList.length;i++)
+        {
+         echo branchList[i]
 }
 
 }
