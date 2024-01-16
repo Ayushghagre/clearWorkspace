@@ -23,12 +23,12 @@ node {
 
             def workspaceDirs = bat(script: "dir /B /A:D ${workspace}", returnStdout: true).trim().split("\\r?\\n")
 
-            for (dir in workspaceDirs) {
-    if (!branchList.contains(dir)) {
-        echo "Deleting workspace for branch: ${dir}"
-        bat "rmdir /S /Q ${workspace}\\${dir}"
-    }
-}
+//             for (dir in workspaceDirs) {
+//     if (!branchList.contains(dir)) {
+//         echo "Deleting workspace for branch: ${dir}"
+//         bat "rmdir /S /Q ${workspace}\\${dir}"
+//     }
+// }
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
