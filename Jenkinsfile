@@ -26,7 +26,7 @@ def branchList = remoteBranches.readLines()
 
 def workspaceDirs = bat(script: "dir ${workspace}", returnStdout: true).trim().split("\\r?\\n")
 
-        for (dir : workspaceDirs)
+        for (dir in workspaceDirs)
             {
                 echo dir
             }
