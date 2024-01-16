@@ -16,7 +16,7 @@ node {
 
         stage("clearing up Workspace") {
             def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
-            echo remoteBranches
+            
 
            
 
@@ -24,9 +24,15 @@ def branchList = remoteBranches.readLines()
                    .findAll { it.contains('refs/heads/') } // Filter lines containing 'refs/heads/'
                    .collect { it.split()[1].replaceAll('refs/heads/', '') } // Extract branch names
 
-for (branch in branchList) {
-    echo branch
-}
+def workspaceDirs = bat(script: "dir /B /A:D ${workspaceRootDir}", returnStdout: true).trim().split("\\r?\\n")
+
+        // Deleting directories that don't have a corresponding remote branch
+        workspaceDirs.each { dir ->
+            if (!branchList.contains(dir)) {
+                echo "Deleting workspace for branch: ${dir}"
+                bat "rmdir /S /Q ${workspaceRootDir}\\${dir}"
+            }
+        }
 
         }
     } catch (Exception e) {
