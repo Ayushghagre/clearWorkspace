@@ -27,7 +27,7 @@ node {
            workspaceDirs.each { dir ->
             if (!branchList.contains(dir)) {
                 echo "Deleting workspace for branch: ${dir}"
-                bat "rmdir /S /Q ${workspaceRootDir}\\${dir}"
+                bat "rmdir /S /Q ${workspace}\\${dir}"
             }
         }
           
