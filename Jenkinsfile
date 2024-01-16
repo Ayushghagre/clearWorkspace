@@ -29,6 +29,12 @@ node {
                     bat "rmdir /S /Q ${workspace}\\${dir}"
                 }
             }
+                workspaceDirs.each { dir ->
+                if (branchList.contains(dir)) {
+                    echo " branch exists for workspace: ${dir}"
+                    
+                }
+            }
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
