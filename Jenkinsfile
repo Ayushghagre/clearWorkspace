@@ -20,7 +20,7 @@ node {
 
             def branchList = remoteBranches.readLines().collect { it.split()[1].replaceAll('refs/heads/', '') }
 
-            for (branch in branchNames) {
+            for (branch in branchList) {
                 echo branch
             }
         }
