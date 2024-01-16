@@ -22,6 +22,7 @@ def branchList = remoteBranches.readLines().collect { it.split()[1].replaceAll('
    for( int i=0;i<branchList.length;i++)
         {
          echo branchList[i]
+        }
 }
 
 }
