@@ -21,14 +21,15 @@ def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdo
         echo remoteBranches
 def branchNames = remoteBranches.readLines().collect { line ->
     line.split(/\s+/)[1].replaceAll('refs/heads/', '')
-}
-
-for(branch in branchNames)
+        for(branch in branchNames)
  {
                 
        echo branch 
    
 }
+}
+
+
 
 }
 catch(Exception e)
