@@ -18,11 +18,16 @@ node {
             def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
             echo remoteBranches
 
-            def branchList = remoteBranches.readLines().collect { it.split()[1].replaceAll('refs/heads/', '') }
+           
 
-            for (branch in branchList) {
-                echo branch
-            }
+def branchList = remoteBranches.readLines()
+                   .findAll { it.contains('refs/heads/') } // Filter lines containing 'refs/heads/'
+                   .collect { it.split()[1].replaceAll('refs/heads/', '') } // Extract branch names
+
+for (branch in branchList) {
+    echo branch
+}
+
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
