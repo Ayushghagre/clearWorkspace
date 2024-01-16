@@ -25,12 +25,12 @@ node {
             for (dir in workspaceDirs) {
             echo "Directory: ${dir}"
                }
-//             for (dir in workspaceDirs) {
-//     if (!branchList.contains(dir)) {
-//         echo "Deleting workspace for branch: ${dir}"
-//         bat "rmdir /S /Q ${workspace}\\${dir}"
-//     }
-// }
+            for (dir in workspaceDirs) {
+    if (!branchList.contains(dir)) {
+        echo "Deleting workspace for branch: ${dir}"
+        bat "rmdir /S /Q ${workspace}\\${dir}"
+    }
+}
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
