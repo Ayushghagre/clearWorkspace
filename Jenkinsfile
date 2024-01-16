@@ -1,14 +1,12 @@
 node
 {
-   properties([
+properties([
         pipelineTriggers([
             cron('H/5 * * * *')
         ])
     ])
 
-def branchName=env.BRANCH_NAME
-def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
-   
+def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clearWorkspace"
 def REPO_URL="https://github.com/Ayushghagre/clearWorkspace.git"
 currentBuild.result="SUCCESS"
 try
@@ -17,24 +15,12 @@ stage("checkout")
 {
    checkout scm
 }
-stage("clearing Workspace")
+stage("clearing up Workspace")
 {
-def branchExists = bat(script: "git ls-remote --heads ${REPO_URL} ${branchName}", returnStdout: true).trim().contains(branchName)
-if(branchExists)
-{
-  echo "no need to clear the  workspace for the branch ${branchName}"
-}
-else
-{
-    dir(workspace)
-    {
-      deleteDir()
-    }
-
+def remoteBranches = bat(script: "git ls-remote --heads ${repoUrl}", returnStdout: true).trim()
+        echo remoteBranches
 }
 
-
-}
 }
 catch(Exception e)
 {
