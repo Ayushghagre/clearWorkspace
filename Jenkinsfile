@@ -1,43 +1,41 @@
-node
-{
-properties([
+node {
+    properties([
         pipelineTriggers([
-            cron('H/11 * * * *')
+            cron('H/5 * * * *')
         ])
     ])
-def branchName=env.BRANCH_NAME
-def workspace="C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clear_workspace_"+branchName
-def REPO_URL="https://github.com/Ayushghagre/clearWorkspace.git"
-currentBuild.result="SUCCESS"
-try
-{
-stage("checkout")
-{
-   checkout scm
-}
-stage("clearing Workspace")
-{
-def branchExists = bat(script: "git ls-remote --heads ${REPO_URL} ${branchName}", returnStdout: true).trim().contains(branchName)
-if(branchExists)
-{
-  echo "no need to clear the  workspace for the branch ${branchName}"
-}
-else
-{
-    dir(workspace)
-    {
-      deleteDir()
+
+   def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clearing_workspace"
+    def REPO_URL = "https://github.com/Ayushghagre/clearWorkspace.git" 
+    currentBuild.result = "SUCCESS"
+
+    try {
+        
+
+        stage("clearing up Workspace") {
+            def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
+
+            def branchList = remoteBranches.readLines()
+                   .findAll { it.contains('refs/heads/') } 
+                   .collect { it.split()[1].replaceAll('refs/heads/', '') } 
+
+           
+           def command = "dir /B /A:D ${workspace}"
+            
+           def workspaceDirs = bat(script: command, returnStdout: true).trim().readLines().drop(1)
+            
+           workspaceDirs.each { dir ->
+            if (!branchList.contains(dir)) {
+                echo "Deleting workspace for branch: ${dir}"
+                bat "rmdir /S /Q ${workspace}\\${dir}"
+            }
+        }
+          
+
+        }
+    } catch (Exception e) {
+        echo "Encountered An Exception"
+        currentBuild.result = "FAILURE"
+        echo e.toString()
     }
-
-}
-
-
-}
-}
-catch(Exception e)
-{
-echo "Encountered  An Exception"
-currentBuild.result="FAILURE"
-echo e.toString()
-}
-}
+} 
