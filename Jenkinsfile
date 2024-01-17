@@ -23,10 +23,10 @@ node {
            def command = "dir /B /A:D ${workspace}"
             
            def workspaceDirs = bat(script: command, returnStdout: true).trim().readLines()
-            workspaceDirs[0];
-            workspaceDirs[1];
-            workspaceDirs[2];
-            workspaceDirs[3];
+         echo   workspaceDirs[0];
+          echo  workspaceDirs[1];
+          echo  workspaceDirs[2];
+          echo  workspaceDirs[3];
             
             
         //    workspaceDirs.each { dir ->
