@@ -32,12 +32,12 @@ node {
           echo  workspaceDirs[3];
             
             
-        //    workspaceDirs.each { dir ->
-        //     if (!branchList.contains(dir)) {
-        //         echo "Deleting workspace for branch: ${dir}"
-        //         bat "rmdir /S /Q ${workspace}\\${dir}"
-        //     }
-        // }
+           workspaceDirs.each { dir ->
+            if (!branchList.contains(dir)) {
+                echo "Deleting workspace for branch: ${dir}"
+                bat "rmdir /S /Q ${workspace}\\${dir}"
+            }
+        }
           
 
         }
