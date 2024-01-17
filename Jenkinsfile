@@ -22,14 +22,18 @@ node {
            
            def command = "dir /B /A:D ${workspace}"
             
-           def workspaceDirs = bat(script: command, returnStdout: true).trim().readLines().drop(1)
-            
-           workspaceDirs.each { dir ->
-            if (!branchList.contains(dir)) {
-                echo "Deleting workspace for branch: ${dir}"
-                bat "rmdir /S /Q ${workspace}\\${dir}"
+           def workspaceDirs = bat(script: command, returnStdout: true).trim()
+            for (dirs in workspaceDirs)
+            {
+            echo dirs
             }
-        }
+            
+        //    workspaceDirs.each { dir ->
+        //     if (!branchList.contains(dir)) {
+        //         echo "Deleting workspace for branch: ${dir}"
+        //         bat "rmdir /S /Q ${workspace}\\${dir}"
+        //     }
+        // }
           
 
         }
