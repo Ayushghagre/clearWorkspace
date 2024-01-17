@@ -18,7 +18,7 @@ node {
             def branchList = remoteBranches.readLines()
                    .findAll { it.contains('refs/heads/') } 
                    .collect { it.split()[1].replaceAll('refs/heads/', '') } 
-               branchList.toString()
+              echo branchList.toString()
            
            def command = "dir /B /A:D ${workspace}"
             echo command
