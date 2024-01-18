@@ -14,7 +14,7 @@ node {
 
     try {
         
-
+        bat "mkdir ${emptyDir}"
         stage("clearing up Workspace") {
             def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
 
