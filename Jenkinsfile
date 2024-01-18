@@ -7,6 +7,9 @@ node {
 
    def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clearing_workspace"
     def REPO_URL = "https://github.com/Ayushghagre/clearWorkspace.git" 
+    def emptyDir = "${workspace}\\emptyDir"
+         bat "mkdir ${emptyDir}"
+
     currentBuild.result = "SUCCESS"
 
     try {
@@ -27,11 +30,11 @@ node {
            workspaceDirs.each { dir ->
             if (!branchList.contains(dir)) {
                 echo "Deleting workspace for branch: ${dir}"
-                 robocopy "${workspace}\\${dir}" null /MIR
+                robocopy "${emptyDir}" "${workspace}\\${dir}" /MIR
             }
         }
           
-
+          bat "rmdir ${emptyDir}"
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
