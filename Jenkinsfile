@@ -30,7 +30,8 @@ node {
            workspaceDirs.each { dir ->
             if (!branchList.contains(dir)) {
                 echo "Deleting workspace for branch: ${dir}"
-                robocopy "${emptyDir}" "${workspace}\\${dir}" /MIR
+                bat "robocopy \"${emptyDir}\" \"${workspace}\\${dir}\" /MIR"
+
             }
         }
           
