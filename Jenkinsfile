@@ -7,9 +7,9 @@ node {
 
    def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clearing_workspace"
     def REPO_URL = "https://github.com/Ayushghagre/clearWorkspace.git" 
-    def emptyDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\emptyDir"
-         bat "mkdir ${emptyDir} && echo.> ${emptyDir}\\index.txt"
-
+    
+   def emptyDirName = "emptyDir"
+    def emptyDir = "${workspace}\\${emptyDirName}"
     currentBuild.result = "SUCCESS"
 
     try {
@@ -28,14 +28,16 @@ node {
            def workspaceDirs = bat(script: command, returnStdout: true).trim().readLines().drop(1)
             
            workspaceDirs.each { dir ->
-            if (!branchList.contains(dir)) {
-                echo "Deleting workspace for branch: ${dir}"
-                bat "robocopy \"${emptyDir}\" \"${workspace}\\${dir}\" /MIR"
-
+                if (!branchList.contains(dir) && !dir.equals(emptyDirName)) {
+                    echo "Deleting workspace for branch: ${dir}"
+                    bat "robocopy \"${emptyDir}\" \"${workspace}\\${dir}\" /MIR"
+                    bat "rmdir /S /Q \"${workspace}\\${dir}\""
+                }
             }
+
+            // Remove the empty directory
+            bat "rmdir /S /Q ${emptyDir}"
         }
-          
-          bat "rmdir ${emptyDir}"
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
