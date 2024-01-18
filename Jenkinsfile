@@ -5,9 +5,9 @@ node {
         ])
     ])
 
-   def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\"
+   def workspace = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\clearing_workspace"
     def REPO_URL = "https://github.com/Ayushghagre/clearWorkspace.git" 
-    def emptyDir = "${workspace}\\emptyDir"
+    def emptyDir = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\emptyDir"
          bat "mkdir ${emptyDir}"
 
     currentBuild.result = "SUCCESS"
