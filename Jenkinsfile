@@ -37,7 +37,7 @@ node {
 
             // Remove the empty directory
             bat "rmdir /S /Q ${emptyDir}"
-        }
+        
         }
     } catch (Exception e) {
         echo "Encountered An Exception"
