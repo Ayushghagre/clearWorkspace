@@ -40,6 +40,8 @@ node {
         
         }
     } catch (Exception e) {
+        // Remove the empty directory
+            bat "rmdir /S /Q ${emptyDir}"
         echo "Encountered An Exception"
         currentBuild.result = "FAILURE"
         echo e.toString()
