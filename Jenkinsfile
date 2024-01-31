@@ -13,7 +13,7 @@ node {
     currentBuild.result = "SUCCESS"
 
     try {
-        
+        bat "if exist \"${emptyDir}\" rmdir /S /Q \"${emptyDir}\""
         bat "mkdir ${emptyDir}"
         stage("clearing up Workspace") {
             def remoteBranches = bat(script: "git ls-remote --heads ${REPO_URL}", returnStdout: true).trim()
